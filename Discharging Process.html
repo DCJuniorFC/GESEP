@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)file:///K:/Faculdade/GESEP/PROJETO/html%20LOCAL.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .gauge {
+        width: 100%;
+        max-width: 120px;
+        font-family: "Roboto", sans-serif;
+        font-size: 20px;
+        color: #004033;
+        
+
+        }
+
+        .gauge__body {
+        width: 100%;
+        height: 0;
+        padding-bottom: 50%;
+        background: #b4c0be;
+        position: relative;
+        border-top-left-radius: 100% 200%;
+        border-top-right-radius: 100% 200%;
+        overflow: hidden;
+        }
+
+        .gauge__fill {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: inherit;
+        height: 100%;
+        background: #009578;
+        transform-origin: center top;
+        transform: rotate(0.25turn);
+        transition: transform 0.2s ease-out;
+        }
+
+        .gauge__fill__C {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: inherit;
+        height: 100%;
+        background: #0000ff;
+        transform-origin: center top;
+        transform: rotate(0.25turn);
+        transition: transform 0.2s ease-out;
+        }
+
+        .gauge__cover {
+        width: 75%;
+        height: 150%;
+        background: #ffffff;
+        border-radius: 50%;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        /* Text */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 25%;
+        box-sizing: border-box;
+        }
+        body {
+        background-image: url('https://github.com/DCJuniorFC/GESEP/blob/main/Ideia%204%20-%20Copia.png?raw=true');
+        background-repeat: no-repeat;
+        background-position-x: 350px;
+        background-position-y: 0px;
+        }
+
+        .fixed1 {
+        position: relative;
+        left: 365px;
+        top: 100px;
+        }
+        .fixed2 {
+        position: relative;
+        left: 800px;
+        top: 40px;
+        }
+        .fixed3 {
+        position: relative;
+        left: 480px;
+        top: 140px;
+        }
+        .fixed4 {
+        position: relative;
+        left: 365px;
+        top: 0px;
+        }
+        .fixed5 {
+        position: relative;
+        left: 800px;
+        top: -60px;
+        }
+        .fixed6 {
+        position: relative;
+        left: 660px;
+        top: -40px;
+        }
+        
+        
+
+
+    </style>
+</head>
+<body>
+    <h2 style="position: relative; top: 100px; left: 380px;"> Charger</h2>
+    <h2 style="position: relative; top: 52px; left: 830px;"> Load</h2>
+    <h2 style="position: relative; top: 305px; left: 590px;"> Battery</h2>
+
+    <div class="fixed1">
+        <div class="gauge" id="one">
+            <div class="gauge__body">
+            <div class="gauge__fill" style="transform: rotate(0turn);"></div>
+            <div class="gauge__cover">0V</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="fixed2">
+        <div class="gauge" id="two">
+            <div class="gauge__body">
+            <div class="gauge__fill" style="transform: rotate(0.131771turn);"></div>
+            <div class="gauge__cover">12.65V</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed3">
+        <div class="gauge" id="three">
+            <div class="gauge__body">
+            <div class="gauge__fill" style="transform: rotate(0.131146turn);"></div>
+            <div class="gauge__cover">12.59V</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed4">
+        <div class="gauge" id="four">
+            <div class="gauge__body">
+            <div class="gauge__fill__C" style="transform: rotate(0turn);"></div>
+            <div class="gauge__cover">0A</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed5">
+        <div class="gauge" id="five">
+            <div class="gauge__body">
+            <div class="gauge__fill__C" style="transform: rotate(0.0525turn);"></div>
+            <div class="gauge__cover">-0.21A</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed6">
+        <div class="gauge" id="six">
+            <div class="gauge__body">
+            <div class="gauge__fill__C" style="transform: rotate(0.05turn);"></div>
+            <div class="gauge__cover">0.2A</div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+            function updateGauge(value,ids, nivel, t="V", gp = ".gauge__fill") {
+            gauge = document.querySelector(`${ids}`);
+            if(value<0){
+                value1 = String(value) + t;
+                value = value*-1
+            }else{
+                value1 = String(value) + t;
+            }
+
+            value = value/nivel;
+            
+            if (value < 0 || value > 1) {
+                return;
+            }
+            gauge.querySelector(gp).style.transform = `rotate(${value / 2}turn)`;
+            gauge.querySelector(".gauge__cover").textContent = `${value1}`;
+            }
+            
+            //0.76,13.73,00:49:00
+            //0	0	-0,2	12,65	0,21	12,59	14:10:00	03:54:00
+            updateGauge(0, "#one", 48);
+            updateGauge(12.65, "#two", 48);
+            updateGauge(12.59, "#three", 48);
+            updateGauge(0, "#four", 2, "A", ".gauge__fill__C");
+            updateGauge(-0.21, "#five", 2, "A", ".gauge__fill__C");
+            updateGauge(0.2, "#six", 2, "A", ".gauge__fill__C");
+    </script>
+   
+
+
+
+<h1 style="position: relative; top: -500px; left: 510px;">Discharging Process</h1>
+
+
+</body></html>
